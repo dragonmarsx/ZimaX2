@@ -14,10 +14,10 @@ echo "  Immich Installer (with immich-compose.yml and  .env)"
 echo "➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖"
 echo ""
 
-printf "Environment file status: "
+printf "Environment file status: $ENV_FILE\n"
 # Check if the environment file exists
 if [ ! -f "$ENV_FILE" ]; then
-  printf "❌ Environment file not found!\n"
+  printf "\n❌ Environment file not found!\n"
   printf "   Please ensure key-value pairs exist on $ENV_FILE\n"
   exit 1
 fi
@@ -40,9 +40,9 @@ while IFS='=' read -r key value; do
 done < $ENV_FILE
 printf "Verified!\n"
 
-# Fetch remote template via curl and substitute variables into myapp.yml
+# Fetch remote template via curl and substitute variables into immich-template.yml
 printf "🎵 Composing environment file from remote Immich YAML template...\n"
-curl -sfL "https://raw.githubusercontent.com/dragonmarsx/ZimaX2/refs/heads/main/stacks/apps/immich-installer.sh" | envsubst > $SETUP_PATH/immich-compose.yml
+curl -sfL "https://raw.githubusercontent.com/dragonmarsx/ZimaX2/refs/heads/main/stacks/apps/immich-template.yml" | envsubst > $SETUP_PATH/immich-compose.yml
 
 printf "⚙️ Installing. Check progress on ZimaOS web dashboard...\n"
 casaos-cli app-management install -f  "$SETUP_PATH/immich-compose.yml"
