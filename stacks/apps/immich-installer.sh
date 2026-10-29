@@ -42,7 +42,7 @@ printf "Verified!\n"
 
 # Fetch remote template via curl and substitute variables into myapp.yml
 printf "🎵 Composing environment file from remote Immich YAML template...\n"
-curl -sfL "https://raw.githubusercontent.com/dragonmarsx/ZimaX2/refs/heads/main/stacks/apps/myapp-template.yml" | envsubst > $SETUP_PATH/immich-compose.yml
+curl -sfL "https://raw.githubusercontent.com/dragonmarsx/ZimaX2/refs/heads/main/stacks/apps/immich-installer.sh" | envsubst > $SETUP_PATH/immich-compose.yml
 
 printf "⚙️ Installing. Check progress on ZimaOS web dashboard...\n"
 casaos-cli app-management install -f  "$SETUP_PATH/immich-compose.yml"
