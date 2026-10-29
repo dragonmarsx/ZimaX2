@@ -1,0 +1,3 @@
+volumes:
+      - ${APPDATA_LOCATION}/backups:/backups
+      - ${UPLOAD_LOCATION}:/upload
