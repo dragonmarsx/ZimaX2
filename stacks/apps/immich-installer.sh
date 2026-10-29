@@ -10,7 +10,7 @@ SETUP_PATH="/DATA/AppData/immich"
 ENV_FILE="$SETUP_PATH/immich.env"
 
 echo "➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖"
-echo "  Immich Installer (with immich-compose.yml and  .env)"
+echo "  Immich Installer (with immich-compose.yml and .env)"
 echo "➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖"
 echo ""
 
@@ -25,7 +25,7 @@ fi
 if [ -z "$IMMICH_VERSION" ] || [ -z "$UPLOAD_LOCATION" ] || [ -z "$DB_DATA_LOCATION" ] || 
    [ -z "$APPDATA_LOCATION" ] || [ -z "$MACHINE_LEARNING_VERSION" ] || [ -z "$REDIS_VERSION" ] || 
    [ -z "$POSTGRES_VERSION" ] || [ -z "$DB_STORAGE_TYPE" ] || [ -z "$DB_PASSWORD" ] || 
-   [ -z "$DB_USERNAME" ] || [ -z "$DB_DATABASE_NAME" ]; then
+   [ -z "$DB_USERNAME" ] || [ -z "$DB_DATABASE_NAME" ] || [ -z "$EXTLIB_LOCATION"]; then
   printf "❌ Error: At least one key/value missing or empty in $ENV_FILE\n"
   exit 1
 fi
