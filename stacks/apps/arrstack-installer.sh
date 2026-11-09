@@ -58,17 +58,31 @@ AGREE_INSTALL=${AGREE_INSTALL:-no}
 if [[ "${AGREE_INSTALL,,}" == "yes" ]]; then
   arrSet=("qbittorrent" "sabnzbd" "prowlarr" "sonarr" "radarr" "bazarr" "lidarr" "flaresolverr" "seerr")
 
+  printf "⚙️ Creating/verifying arrstack network.\n"
+  if ! docker network inspect arrstack_net >/dev/null 2>&1; then
+    if ! docker network create arrstack_net; then
+	  printf "❌ Failed to create arrstack network.\n" >&2
+	  exit 1
+    fi
+  fi
+  # Continue only if the network provably exists.
+  if ! docker network inspect arrstack_net >/dev/null 2>&1; then
+    printf "❌ Arrstack network not found after creation.\n" >&2
+    exit 1
+  fi
+  docker network ls -f name=arrstack_net
+
   for f in "${arrSet[@]}"; do
     # Fetch remote template via curl and substitute variables into *-template.yml
-    printf "🎼 %-14.20s: Fetching yaml and composing\n" $f
+    printf "🎼 %-14.20s: Fetching and composing\n" $f
     curl -sfL "https://raw.githubusercontent.com/dragonmarsx/ZimaX2/refs/heads/main/stacks/arrs/$f-template.yml" | envsubst > "$ARR_PATH/$f-compose.yml"
 
   done
 
   for f in "${arrSet[@]}"; do
     # Equivalent to docker compose up -d
-    #casaos-cli app-management install -f "$ARR_PATH/$f-compose.yml"  
-    echo "[Date] app is being installed asynchronously"    
+    casaos-cli app-management install -f "$ARR_PATH/$f-compose.yml"    
+    sleep 2	
   done    
 
   printf "🕔 Give ZimaOS sufficient time to complete all installations.\n"
@@ -85,4 +99,3 @@ if [[ "${AGREE_INSTALL,,}" == "yes" ]]; then
 fi
 printf "❌ Canceling installation of arr stacks apps.\n"
 printf "   To re-attempt, execute the same installation script.\n\n\n"
-
