@@ -1,6 +1,6 @@
 name: arr-seerr  # Stack & directory name
 networks:
-  arrstack_network:
+  arrstack_net:
     external: true
 services:
   app:
@@ -17,10 +17,10 @@ services:
       LOG_LEVEL: debug  
     restart: unless-stopped
     networks:
-      - arrstack_network
+      - arrstack_net
     dns:
-      - 1.1.1.1
-      - 1.0.0.1
+      - ${DNS_IP1}
+      - ${DNS_IP2}
     deploy:
       resources:
         reservations:
@@ -32,7 +32,7 @@ services:
     init: true
     healthcheck:
       test: wget --no-verbose --tries=1 --spider
-        http://localhost:5055/api/v1/settings/public || exit 1
+        http://${LOCAL_IP}:5055/api/v1/settings/public || exit 1
       interval: 30s
       timeout: 10s
       retries: 3
@@ -44,3 +44,4 @@ x-casaos:
   title:
     en_US: Seerr
     custom: Seerr
+    
