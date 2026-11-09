@@ -1,6 +1,6 @@
 name: arr-lidarr  # Stack & directory name
 networks:
-  arrstack_network:
+  arrstack_net:
     external: true
 services:
   lidarr:
@@ -18,10 +18,10 @@ services:
       TZ: ${TZ}
     restart: unless-stopped
     networks:
-      - arrstack_network
+      - arrstack_net
     dns:
-      - 1.1.1.1
-      - 1.0.0.1
+      - ${DNS_IP1}
+      - ${DNS_IP2}
     deploy:
       resources:
         reservations:
@@ -37,4 +37,4 @@ x-casaos:
   title:
     en_US: Lidarr
     custom: Lidarr
-  #version: 3.1.0 #(2026.09)
+  #version: 3.1.0 #(2026.11)
