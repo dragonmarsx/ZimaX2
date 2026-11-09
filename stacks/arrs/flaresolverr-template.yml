@@ -1,6 +1,6 @@
 name: arr-flaresolverr  # Stack & directory name
 networks:
-  arrstack_network:
+  arrstack_net:
     external: true
 services:
   flaresolverr:
@@ -19,10 +19,10 @@ services:
       CAPTCHA_SOLVER: none
     restart: unless-stopped
     networks:
-      - arrstack_network
+      - arrstack_net
     dns:
-      - 1.1.1.1
-      - 1.0.0.1
+      - ${DNS_IP1}
+      - ${DNS_IP2}
     deploy:
       resources:
         reservations:
@@ -41,4 +41,4 @@ x-casaos:
   title:
     en_US: FlareSolverr
     custom: FlareSolverr
-   #version: 3.4.6 #(2026.09)
+   #version: 3.4.6 #(2026.11)
