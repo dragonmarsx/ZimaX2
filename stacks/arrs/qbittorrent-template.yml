@@ -1,6 +1,6 @@
 name: arr-qbittorrent  # Stack & directory name ls -l /var/lib/casaos/apps/
 networks:
-  arrstack_network:
+  arrstack_net:
     external: true
 services:
   qbittorrent:
@@ -22,10 +22,10 @@ services:
       WEBUI_PORT: "8080"
       TORRENTING_PORT: "6881"
     networks:
-      - arrstack_network
+      - arrstack_net
     dns:
-      - 1.1.1.1
-      - 1.0.0.1    
+      - ${DNS_IP1}
+      - ${DNS_IP2}  
     restart: unless-stopped
     deploy:
       resources:
@@ -42,5 +42,4 @@ x-casaos:
   title:
     en_US: qBittorrent
     custom: qBittorrent
-  #version: 5.0.4 #(2026.09)
-  
+  #version: 5.0.4 #(2026.11)
