@@ -37,7 +37,7 @@ services:
           cpus: "1.00"
 x-casaos:
   main: qbittorrent
-  port_map: "8080"
+  port_map: "${PORT_MAP}"
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@gh-pages/apps/org.icewhale.qbittorrent/assets/icon.svg
   title:
     en_US: qBittorrent
