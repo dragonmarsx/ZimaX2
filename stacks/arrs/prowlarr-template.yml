@@ -1,6 +1,6 @@
 name: arr-prowlarr  # Stack & directory name
 networks:
-  arrstack_network:
+  arrstack_net:
     external: true
 services:
   prowlarr:
@@ -17,10 +17,10 @@ services:
       TZ: ${TZ}
     restart: unless-stopped
     networks:
-      - arrstack_network
+      - arrstack_net
     dns:
-      - 1.1.1.1
-      - 1.0.0.1
+      - ${DNS_IP1}
+      - ${DNS_IP2}
     deploy:
       resources:
         reservations:
@@ -36,4 +36,4 @@ x-casaos:
   title:
     en_US: Prowlarr
     custom: Prowlarr
-  #version: 2.5.2 #(2026.09)
+  #version: 2.5.2 #(2026.11)
